@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#quizBox {
+  display: flex;
+  justify-content: center;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  width: 400px;
+  background-color: bisque;
+}
+
+li {
+  background-color: purple;
+  margin-top: 10px;
+  padding: 5px 15px;
+  width: 80%;
+  font-size: 18px;
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
