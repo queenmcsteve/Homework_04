@@ -1,32 +1,32 @@
 var startButton = document.querySelector("#start");
 var timeleftEl = document.querySelector("#timeleft");
+var questionsDiv = document.getElementById("questionsDiv");
+var enterInitials = document.getElementById("enter-initials");
+//hide initials entry box
+enterInitials.style.display = "none";
 
-duration = 60;
-
+var remainingSeconds = "";
 function startTimer() {
+  //disable the button
+  startButton.disabled = true;
   //start the timer
+  score = 0;
+  questionIndex = 0;
+  currentscore.textContent = score;
+  duration = 60;
   var count = 0;
+  timeleftEl.textContent = duration + " seconds";
   timer = setInterval(function () {
     count++;
     var remainingSeconds = duration - count;
     //show the time left
     timeleftEl.textContent = remainingSeconds + " seconds";
-    //say something when time gets to 0
-    if (count >= 5) {
-      questionsDiv.textContent =
-        "That's it! " +
-        "You got " +
-        score +
-        "/" +
-        questions.length +
-        "correct :)";
+    //end the game when time gets to 0
+    if (remainingSeconds <= 0) {
+      finished();
     }
   }, 1000);
   render(questionIndex);
-  //add if loop to end game when timer hits 0
-  if (duration <= 0) {
-    clearInterval;
-  }
 }
 
 startButton.addEventListener("click", startTimer);
@@ -62,10 +62,10 @@ var questions = [
 //Render the question
 function render(questionIndex) {
   //clear existing data
-  //   questionsDiv.innerHTML = "";
+  questionsDiv.innerHTML = "";
   ulCreate.innerHTML = "";
   //loop through question array contents
-  for (var i = 0; i < questions.length; i++) {
+  for (var i = 0; i <= questions.length; i++) {
     var userQuestion = questions[questionIndex].title;
     var userChoices = questions[questionIndex].choices;
     questionsDiv.textContent = userQuestion;
@@ -95,21 +95,39 @@ function compare(event) {
     }
     //incorrect
     else {
-      duration = duration - 10;
+      duration = duration - 15;
     }
   }
   //proceed to next question
   questionIndex++;
+  console.log(questionIndex);
+  console.log(questions.length);
   //check if questions are exhausted
   if (questionIndex >= questions.length) {
-    createDiv.textContent =
-      "That's it! " +
-      "You got " +
-      score +
-      "/" +
-      questions.length +
-      "correct :)";
+    finished();
   } else {
     render(questionIndex);
   }
 }
+
+//function to end the game
+function finished() {
+  questionsDiv.style.display = "none";
+  console.log(timer);
+  clearInterval(timer);
+  const scoreDiv = document.getElementById("scoreDiv");
+  var scoretitle = document.createElement("h1");
+  scoretitle = "That's it! You got " + score;
+  scoreDiv.textContent = scoretitle;
+  startButton.disabled = false;
+  localStorage.setItem("currentScore", score);
+  //display input box for initials
+  enterInitials.style.display = "inline-block";
+}
+
+function submitScore() {
+  var initials = document.getElementById("initials").value;
+  console.log(initials + " " + score);
+  localStorage.setItem("currentInitials", initials);
+}
+submitButton.addEventListener("click", submitScore);
