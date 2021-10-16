@@ -166,8 +166,7 @@ function submitScore() {
       localStorage.setItem("allScores", JSON.stringify(allScores));
     }
   }
-
-  console.log(allScores);
-  console.log(allScores);
+  //send to high scores page
+  window.location.replace("./scores.html");
 }
 submitButton.addEventListener("click", submitScore);
