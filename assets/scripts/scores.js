@@ -9,7 +9,7 @@ var testObject = [
 ];
 localStorage.setItem("testObject", JSON.stringify(testObject));
 
-var retrievedObject = JSON.parse(localStorage.getItem("testObject"));
+var retrievedObject = JSON.parse(localStorage.getItem(testObject));
 
 var tbody = document.getElementById("tbody");
 

@@ -115,6 +115,8 @@ function finished() {
   questionsDiv.style.display = "none";
   console.log(timer);
   clearInterval(timer);
+
+  score = score + timer;
   const scoreDiv = document.getElementById("scoreDiv");
   var scoretitle = document.createElement("h1");
   scoretitle = "That's it! You got " + score;
@@ -126,8 +128,9 @@ function finished() {
 }
 
 function submitScore() {
-  var initials = document.getElementById("initials").value;
-  console.log(initials + " " + score);
-  localStorage.setItem("currentInitials", initials);
+  initials = document.getElementById("initials").value;
+  var userScore = [{ initials: initials, score: score }];
+  console.log(userScore);
+  localStorage.setItem("userScore", JSON.stringify(userScore));
 }
 submitButton.addEventListener("click", submitScore);
