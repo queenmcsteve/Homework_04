@@ -119,7 +119,8 @@ function finished() {
   var timeleft = document.getElementById("timeleft").innerHTML;
   timeleft = parseInt(timeleft);
   score = score + timeleft;
-  // var scoretitle = document.createElement("h1");
+  //report the score
+  currentscore.textContent = score;
   scoretitle = "That's it! You got " + score;
   scoreDiv.textContent = scoretitle;
   startButton.disabled = false;
