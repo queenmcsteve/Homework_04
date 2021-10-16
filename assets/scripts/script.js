@@ -116,8 +116,6 @@ function finished() {
   console.log(timer);
   clearInterval(timer);
 
-  // score = score + timer;
-  // const scoreDiv = document.getElementById("scoreDiv");
   // var scoretitle = document.createElement("h1");
   scoretitle = "That's it! You got " + score;
   scoreDiv.textContent = scoretitle;
