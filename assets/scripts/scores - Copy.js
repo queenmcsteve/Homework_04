@@ -1,26 +1,15 @@
 var currentInitials = localStorage.getItem("curentInitials");
 var currentScore = localStorage.getItem("currentScore");
 var submitButton = document.querySelector("#submitButton");
-var allScores = localStorage.getItem("allScores");
 console.log(currentScore);
 
-// var testObject = [
-//   { initials: "steve", score: 5 },
-//   { initials: "bobby", score: 7 },
-// ];
-// localStorage.setItem("testObject", JSON.stringify(testObject));
+var testObject = [
+  { initials: "steve", score: 5 },
+  { initials: "bobby", score: 7 },
+];
+localStorage.setItem("testObject", JSON.stringify(testObject));
 
-// var allScores = localStorage.getItem("allScores");
-// allScores = JSON.parse(allScores);
-
-// if (allScores !== null) {
-//   for (var i=0; i<allScores.length; i++) {
-
-//   }
-// }
-
-var retrievedObject = JSON.parse(localStorage.getItem("allScores"));
-console.log(retrievedObject);
+var retrievedObject = JSON.parse(localStorage.getItem(testObject));
 
 var tbody = document.getElementById("tbody");
 

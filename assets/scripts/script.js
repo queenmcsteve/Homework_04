@@ -116,9 +116,9 @@ function finished() {
   console.log(timer);
   clearInterval(timer);
 
-  score = score + timer;
-  const scoreDiv = document.getElementById("scoreDiv");
-  var scoretitle = document.createElement("h1");
+  // score = score + timer;
+  // const scoreDiv = document.getElementById("scoreDiv");
+  // var scoretitle = document.createElement("h1");
   scoretitle = "That's it! You got " + score;
   scoreDiv.textContent = scoretitle;
   startButton.disabled = false;
@@ -130,7 +130,44 @@ function finished() {
 function submitScore() {
   initials = document.getElementById("initials").value;
   var userScore = [{ initials: initials, score: score }];
+  //create non-array version to add to allScores array if it exists
+  var userScorePush = { initials: initials, score: score };
   console.log(userScore);
   localStorage.setItem("userScore", JSON.stringify(userScore));
+  //create the allScores item in localStorage if it doesn't exist
+  if (localStorage.getItem("allScores") === null) {
+    localStorage.setItem("allScores", JSON.stringify(userScore));
+    console.log("allScores was null");
+  }
+  //
+  else {
+    var allScores = JSON.parse(localStorage.getItem("allScores"));
+    //if array has fewer than three items, then push, sort and store
+    if (allScores.length <= 2) {
+      allScores.push(userScorePush);
+      //sort the array
+      var sortedScores = allScores.sort(function (a, b) {
+        return b.score - a.score;
+      });
+      allScores = sortedScores;
+      localStorage.setItem("allScores", JSON.stringify(allScores));
+      console.log("array was <=2");
+    } //if it has three or more items, push, sort, splice and store
+    else {
+      allScores.push(userScorePush);
+      //sort the array
+      var sortedScores = allScores.sort(function (a, b) {
+        return b.score - a.score;
+      });
+      allScores = sortedScores;
+      const index = allScores.indexOf(3);
+      allScores.splice(index, 3);
+      console.log("array was >2 long, sorted with userScore and spliced 3");
+      localStorage.setItem("allScores", JSON.stringify(allScores));
+    }
+  }
+
+  console.log(allScores);
+  console.log(allScores);
 }
 submitButton.addEventListener("click", submitScore);
