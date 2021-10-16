@@ -115,7 +115,10 @@ function finished() {
   questionsDiv.style.display = "none";
   console.log(timer);
   clearInterval(timer);
-
+  //add time left to score
+  var timeleft = document.getElementById("timeleft").innerHTML;
+  timeleft = parseInt(timeleft);
+  score = score + timeleft;
   // var scoretitle = document.createElement("h1");
   scoretitle = "That's it! You got " + score;
   scoreDiv.textContent = scoretitle;
